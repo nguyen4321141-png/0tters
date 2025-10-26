@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chat - Otter Pet Care AI</title>
-    <link rel="stylesheet" href="chat-style.css">   
+    <link rel="stylesheet" href="chat-style.css">
 </head>
 <body>
     <nav>
         <div class="nav-container">
             <a href="index.html" class="logo">
                 <div class="logo-icon">🦦</div>
-                <span>Otter</span>
+                <span>Otter.AI</span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -24,26 +24,34 @@
 
     <div class="chat-container">
         <aside class="sidebar">
-            <button class="new-chat-btn">
-                <span>➕</span> New Chat
+            <button class="new-chat-btn" id="newChatBtn">
+                Start New Chat
             </button>
 
             <div class="sidebar-section">
                 <h3>Quick Topics</h3>
                 <div class="quick-topics">
-                    <button class="topic-btn">🐕 Dog Care</button>
-                    <button class="topic-btn">🐈 Cat Care</button>
-                    <button class="topic-btn">🐦 Bird Care</button>
-                    <button class="topic-btn">🐠 Fish Care</button>
-                    <button class="topic-btn">🐰 Small Pets</button>
+                    <button class="topic-btn" data-topic="dog">🐕 Dog Care</button>
+                    <button class="topic-btn" data-topic="cat">🐈 Cat Care</button>
+                    <button class="topic-btn" data-topic="bird">🐦 Bird Care</button>
+                    <button class="topic-btn" data-topic="fish">🐠 Fish Care</button>
+                    <button class="topic-btn" data-topic="small">🐰 Small Pets</button>
                 </div>
             </div>
 
             <div class="sidebar-section">
                 <h3>Recent Chats</h3>
                 <div class="chat-history-item active">
-                    <h4>title of the chat</h4>
-                    <p>time of the chat</p>
+                    <h4>Puppy Feeding Schedule</h4>
+                    <p>2 hours ago</p>
+                </div>
+                <div class="chat-history-item">
+                    <h4>Cat Vaccination Guide</h4>
+                    <p>Yesterday</p>
+                </div>
+                <div class="chat-history-item">
+                    <h4>Training Tips for Dogs</h4>
+                    <p>3 days ago</p>
                 </div>
             </div>
         </aside>
@@ -54,12 +62,12 @@
                     <div class="chat-avatar">🦦</div>
                     <div class="chat-header-text">
                         <h2>Otter Assistant</h2>
-                        <p>Your AI Pet Care Expert</p>
+                        <p id="statusText">Ready to help</p>
                     </div>
                 </div>
                 <div class="chat-actions">
-                    <button class="action-btn">🔄 Clear</button>
-                    <button class="action-btn">📥 Export</button>
+                    <button class="action-btn" id="clearBtn">Clear Chat</button>
+                    <button class="action-btn" id="exportBtn">Export</button>
                 </div>
             </div>
 
@@ -70,19 +78,19 @@
                     <p>Your trusted AI companion for all pet care questions. How can I help you today?</p>
                     
                     <div class="suggestion-cards">
-                        <div class="suggestion-card">
+                        <div class="suggestion-card" data-suggestion="health">
                             <h3>🏥 Health & Wellness</h3>
                             <p>Ask about symptoms, vet visits, and preventive care</p>
                         </div>
-                        <div class="suggestion-card">
+                        <div class="suggestion-card" data-suggestion="nutrition">
                             <h3>🍖 Nutrition Guide</h3>
                             <p>Get feeding schedules and diet recommendations</p>
                         </div>
-                        <div class="suggestion-card">
+                        <div class="suggestion-card" data-suggestion="training">
                             <h3>🎾 Training Tips</h3>
                             <p>Learn effective training methods and behavior solutions</p>
                         </div>
-                        <div class="suggestion-card">
+                        <div class="suggestion-card" data-suggestion="safety">
                             <h3>🛡️ Safety First</h3>
                             <p>Discover essential safety tips for your pet</p>
                         </div>
@@ -99,15 +107,15 @@
                         id="chatInput"
                     >
                     <div class="input-actions">
-                        <button class="icon-btn" title="Attach file">📎</button>
-                        <button class="icon-btn" title="Voice input">🎤</button>
+                        <button class="icon-btn" title="Attach file" id="attachBtn">📎</button>
+                        <button class="icon-btn" title="Voice input" id="voiceBtn">🎤</button>
                     </div>
                     <button class="send-btn" id="sendBtn">Send</button>
                 </div>
             </div>
         </main>
     </div>
-
-    <script src="chat-script.js"></script>
+<script src="chat-script.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js"></script>
 </body>
 </html>
