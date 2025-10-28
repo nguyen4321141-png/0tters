@@ -1,5 +1,3 @@
-// Smooth scrolling and animations for the Otter Pet Care website
-
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('a[href^="#"]');
@@ -62,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(section);
     });
 
-    // Enhanced navigation link animations (ripple effect removed)
+
     const navItems = document.querySelectorAll('.nav-links a');
     
     navItems.forEach(item => {
