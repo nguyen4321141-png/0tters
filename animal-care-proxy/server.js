@@ -1,6 +1,3 @@
-// ===== SIMPLER APPROACH USING @gradio/client =====
-// This library handles all the Gradio API complexity for you
-
 const express = require('express');
 const cors = require('cors');
 const { Client } = require("@gradio/client");
@@ -278,38 +275,14 @@ app.post('/api/clear', (req, res) => {
     res.json({ success: true });
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
     console.log(`📡 Space: ${SPACE_NAME}`);
 });
 
-// ===== SETUP INSTRUCTIONS =====
-/*
-1. Install dependencies:
-   npm install express cors @gradio/client
 
-2. Run:
-   node server.js
 
-3. Open browser:
-   http://localhost:3000
-
-4. Test the chat interface!
-*/
-
-// ===== PACKAGE.JSON =====
-/*
-{
-  "name": "animal-care-proxy",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
     "@gradio/client": "^1.0.0"
   }
 }
