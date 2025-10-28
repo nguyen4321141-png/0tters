@@ -40,19 +40,15 @@
             </div>
 
             <div class="sidebar-section">
-                <h3>Recent Chats</h3>
-                <div class="chat-history-item active">
-                    <h4>Puppy Feeding Schedule</h4>
-                    <p>2 hours ago</p>
+                <div class="section-header">
+                    <h3>Pet Profiles 🐱 </h3>
+                    <div class="profile-buttons">
+                        <button class="clear_profile" id="clearProfileBtn" title="Clear all pet profiles">🗑️</button>
+                        <button class="add_profile" id="addProfileBtn" title="Add pet profile">+</button>
+                    </div>
                 </div>
-                <div class="chat-history-item">
-                    <h4>Cat Vaccination Guide</h4>
-                    <p>Yesterday</p>
-                </div>
-                <div class="chat-history-item">
-                    <h4>Training Tips for Dogs</h4>
-                    <p>3 days ago</p>
-                </div>
+                <p style="color:grey; font-size: smaller; padding: 2px;" class="no_profile">you have no pet profiles added yet.</p>
+                <div id="petProfilesList"></div>
             </div>
         </aside>
 
@@ -114,6 +110,50 @@
                 </div>
             </div>
         </main>
+    </div>
+    
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Pet Profile</h2>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="petProfileForm">
+                <div class="form-group">
+                    <label for="petName">Pet Name *</label>
+                    <input type="text" id="petName" name="petName" required placeholder="Enter pet name">
+                </div>
+                <div class="form-group">
+                    <label for="petType">Pet Type *</label>
+                    <select id="petType" name="petType" required>
+                        <option value="">Select pet type</option>
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                        <option value="bird">Bird</option>
+                        <option value="fish">Fish</option>
+                        <option value="rabbit">Rabbit</option>
+                        <option value="hamster">Hamster</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="petBreed">Breed</label>
+                    <input type="text" id="petBreed" name="petBreed" placeholder="Enter breed (optional)">
+                </div>
+                <div class="form-group">
+                    <label for="petAge">Age</label>
+                    <input type="text" id="petAge" name="petAge" placeholder="e.g., 2 years, 5 months">
+                </div>
+                <div class="form-group">
+                    <label for="petNotes">Notes</label>
+                    <textarea id="petNotes" name="petNotes" rows="3" placeholder="Any additional notes about your pet (optional)"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn-submit">Add Pet</button>
+                </div>
+            </form>
+        </div>
     </div>
 <script src="chat-script.js"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js"></script>
