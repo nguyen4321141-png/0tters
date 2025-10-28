@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendBtn = document.getElementById('sendBtn');
     if (sendBtn) {
         sendBtn.addEventListener('click', handleSendMessage);
-        console.log('✅ Send button attached');
+        console.log('Send button attached');
     }
     
     // Enter key in input
@@ -190,28 +190,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 handleSendMessage();
             }
         });
-        console.log('✅ Input field attached');
+        console.log('Input field attached');
     }
     
     // Clear button
     const clearBtn = document.getElementById('clearBtn');
     if (clearBtn) {
         clearBtn.addEventListener('click', clearChat);
-        console.log('✅ Clear button attached');
+        console.log('Clear button attached');
     }
     
     // Export button
     const exportBtn = document.getElementById('exportBtn');
     if (exportBtn) {
         exportBtn.addEventListener('click', exportChat);
-        console.log('✅ Export button attached');
+        console.log('Export button attached');
     }
     
     // New chat button
     const newChatBtn = document.getElementById('newChatBtn');
     if (newChatBtn) {
         newChatBtn.addEventListener('click', clearChat);
-        console.log('✅ New chat button attached');
+        console.log('New chat button attached');
     }
     
     // Topic buttons
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    console.log(`✅ ${topicBtns.length} topic buttons attached`);
+    console.log(`${topicBtns.length} topic buttons attached`);
     
     // Suggestion cards
     const suggestionCards = document.querySelectorAll('.suggestion-card');
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    console.log(`✅ ${suggestionCards.length} suggestion cards attached`);
+    console.log(`${suggestionCards.length} suggestion cards attached`);
     
     // Chat history items
     const chatHistoryItems = document.querySelectorAll('.chat-history-item');
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         });
     });
-    console.log(`✅ ${chatHistoryItems.length} chat history items attached`);
+    console.log(`${chatHistoryItems.length} chat history items attached`);
     
     // Attach and voice buttons (placeholder functionality)
     const attachBtn = document.getElementById('attachBtn');
@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
         attachBtn.addEventListener('click', function() {
             alert('File attachment feature coming soon!');
         });
-        console.log('✅ Attach button attached');
+        console.log('Attach button attached');
     }
     
     const voiceBtn = document.getElementById('voiceBtn');
@@ -291,5 +291,5 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('✅ Voice button attached');
     }
     
-    console.log('🎉 All event listeners attached!');
+    console.log('All event listeners attached!');
 });
