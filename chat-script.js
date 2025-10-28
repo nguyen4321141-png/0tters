@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = '/api/chat';
 let sessionId = 'user_' + Date.now();
 let isTyping = false;
 let conversationHistory = [];
