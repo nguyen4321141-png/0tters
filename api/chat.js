@@ -6,7 +6,7 @@ export default async function handler(req, res) {
         const { message, sessionId } = req.body;
 
         try {
-            const client = await Client.connect("your-gradio-space-name"); // Replace with your actual Gradio Space name
+            const client = await Client.connect("yefann/0tters.ai"); // Replace with your actual Gradio Space name
             const result = await client.predict("/chat", { message });
 
             res.status(200).json({ success: true, response: result });
@@ -17,3 +17,4 @@ export default async function handler(req, res) {
         res.status(405).json({ success: false, error: "Method Not Allowed" });
     }
 }
+
