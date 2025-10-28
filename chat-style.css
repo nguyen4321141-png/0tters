@@ -54,13 +54,32 @@ nav {
 }
 
 .nav-links a {
+    display: inline-block;
+    position: relative;
     text-decoration: none;
     color: #333;
     font-weight: 500;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
 }
 
-.nav-links a:hover {
-    color: #333;
+.nav-links a::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #0087ca;
+    transform-origin: bottom-right;
+    transition: transform 0.3s ease-out;
+}
+
+.nav-links a:hover::after{
+    transform:scaleX(1);
+    transform-origin: bottom left;
 }
 
 .chat-container {
@@ -107,41 +126,63 @@ nav {
     margin-bottom: 2rem;
 }
 
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .sidebar-section h3 {
     font-size: 0.85rem;
     color: #888;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 1rem;
+    margin: 0;
 }
 
-.chat-history-item {
+.add_profile{
+    width: 21px;
+    height: 21px;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    background: linear-gradient(135deg, #667eea15, #764ba215);;
+}
+
+.add_profile:hover{
+    transition: all 0.2s ease;
+    transform: translateY(-2px);
+    cursor:pointer
+
+}
+.pet-profiles{
     padding: 0.9rem;
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.2s;
-    margin-bottom: 0.5rem;
+    margin-top: 0.8rem;
 }
 
-.chat-history-item:hover {
+.pet-profiles:hover{
     background: #f5f5f5;
 }
 
-.chat-history-item.active {
+.pet-profiles.active{
     background: linear-gradient(135deg, #667eea15, #764ba215);
     border-left: 3px solid #667eea;
 }
 
-.chat-history-item h4 {
+.pet-profiles h4{
     font-size: 0.95rem;
     color: #333;
     margin-bottom: 0.3rem;
 }
 
-.chat-history-item p {
+.pet-profiles p{
     font-size: 0.8rem;
     color: #888;
 }
+
 
 .quick-topics {
     display: flex;
@@ -500,6 +541,154 @@ nav {
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
+}
+
+.no_profile {
+    display: block;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-content form {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.btn-cancel,
+.btn-submit {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-cancel {
+    background: transparent;
+    border: 2px solid #e0e0e0;
+    color: #666;
+}
+
+.btn-cancel:hover {
+    border-color: #999;
+    color: #333;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
 }
 
 @media (max-width: 968px) {
