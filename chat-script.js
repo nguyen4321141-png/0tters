@@ -1,6 +1,8 @@
+const API_URL = 'http://localhost:3000';
 let sessionId = 'user_' + Date.now();
 let isTyping = false;
 let conversationHistory = [];
+let petProfiles = JSON.parse(localStorage.getItem('petProfiles')) || [];
 
 // DOM manipulation functions
 function addMessage(content, isUser = false) {
@@ -97,9 +99,9 @@ async function handleSendMessage() {
     if (statusText) statusText.textContent = 'Thinking...';
     
     try {
-        console.log('Sending message to:', `/api/chat`);
+        console.log('Sending message to:', `${API_URL}/api/chat`);
         
-        const response = await fetch(`/api/chat`, {
+        const response = await fetch(`${API_URL}/api/chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message, sessionId })
@@ -170,7 +172,7 @@ function exportChat() {
     URL.revokeObjectURL(url);
 }
 
-// Event listeners
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, setting up event listeners...');
     
@@ -254,27 +256,130 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     console.log(`${suggestionCards.length} suggestion cards attached`);
+
+    initializePetProfiles();
+   
+function initializePetProfiles() {
+    renderPetProfiles();
     
-    // Chat history items
-    const chatHistoryItems = document.querySelectorAll('.chat-history-item');
-    chatHistoryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Remove active class from all items
-            chatHistoryItems.forEach(i => i.classList.remove('active'));
-            // Add active class to clicked item
-            this.classList.add('active');
-            
-            // For demo purposes, load a sample conversation
-            clearChat();
-            setTimeout(() => {
-                addMessage("What's the best feeding schedule for a puppy?", true);
-                addMessage("For puppies, feed 3-4 times daily until 6 months old. Use high-quality puppy food and follow package guidelines. Always provide fresh water.", false);
-            }, 100);
+    // Add profile button
+    const addProfileBtn = document.getElementById('addProfileBtn');
+    if (addProfileBtn) {
+        addProfileBtn.addEventListener('click', openAddPetModal);
+    }
+    
+    // Modal close buttons
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const modal = document.getElementById('profileModal');
+    
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeAddPetModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeAddPetModal);
+    
+    // Close modal on overlay click
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeAddPetModal();
+            }
         });
-    });
-    console.log(`${chatHistoryItems.length} chat history items attached`);
+    }
     
-    // Attach and voice buttons (placeholder functionality)
+    // Form submission
+    const petProfileForm = document.getElementById('petProfileForm');
+    if (petProfileForm) {
+        petProfileForm.addEventListener('submit', handleAddPetProfile);
+    }
+}
+
+function openAddPetModal() {
+    const modal = document.getElementById('profileModal');
+    if (modal) {
+        modal.classList.add('active');
+    }
+}
+
+function closeAddPetModal() {
+    const modal = document.getElementById('profileModal');
+    if (modal) {
+        modal.classList.remove('active');
+        // Reset form
+        const form = document.getElementById('petProfileForm');
+        if (form) form.reset();
+    }
+}
+
+function handleAddPetProfile(e) {
+    e.preventDefault();
+    
+    const petName = document.getElementById('petName').value.trim();
+    const petType = document.getElementById('petType').value;
+    const petBreed = document.getElementById('petBreed').value.trim();
+    const petAge = document.getElementById('petAge').value.trim();
+    const petNotes = document.getElementById('petNotes').value.trim();
+    
+    if (!petName || !petType) {
+        alert('Please fill in required fields (Name and Type)');
+        return;
+    }
+    
+    // Create new pet profile
+    const newProfile = {
+        id: Date.now(),
+        name: petName,
+        type: petType,
+        breed: petBreed,
+        age: petAge,
+        notes: petNotes,
+        createdAt: new Date().toLocaleDateString()
+    };
+    
+    // Add to array
+    petProfiles.push(newProfile);
+    
+    // Save to localStorage (client-side only)
+    localStorage.setItem('petProfiles', JSON.stringify(petProfiles));
+    
+    // Render profiles
+    renderPetProfiles();
+    
+    // Close modal
+    closeAddPetModal();
+}
+
+function renderPetProfiles() {
+    const profilesList = document.getElementById('petProfilesList');
+    const noProfileMessage = document.querySelector('.no_profile');
+    
+    if (!profilesList) return;
+    
+    // Clear existing profiles
+    profilesList.innerHTML = '';
+    
+    if (petProfiles.length === 0) {
+        if (noProfileMessage) noProfileMessage.style.display = 'block';
+    } else {
+        if (noProfileMessage) noProfileMessage.style.display = 'none';
+    }
+    
+    // Render each profile
+    petProfiles.forEach((profile, index) => {
+        const profileDiv = document.createElement('div');
+        profileDiv.className = 'pet-profiles';
+        if (index === 0) profileDiv.classList.add('active');
+        
+        profileDiv.innerHTML = `
+            <h4>${profile.name}</h4>
+            <p>${profile.createdAt}</p>
+        `;
+        profileDiv.addEventListener('click', function() {
+            document.querySelectorAll('.pet-profiles').forEach(p => p.classList.remove('active'));
+            profileDiv.classList.add('active');
+        });
+        
+        profilesList.appendChild(profileDiv);
+    });
+}    
     const attachBtn = document.getElementById('attachBtn');
     if (attachBtn) {
         attachBtn.addEventListener('click', function() {
@@ -283,13 +388,13 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Attach button attached');
     }
     
-    const voiceBtn = document.getElementById('voiceBtn');
-    if (voiceBtn) {
-        voiceBtn.addEventListener('click', function() {
-            alert('Voice input feature coming soon!');
+    const imgBtn = document.getElementById('addimageBtn');
+    if (imgBtn) {
+        imgBtn.addEventListener('click', function() {
+            alert('Image attachment feature not added yet!');
         });
-        console.log('✅ Voice button attached');
+        console.log('Image button attached');
     }
-    
+
     console.log('All event listeners attached!');
 });
