@@ -382,7 +382,7 @@ function renderPetProfiles() {
     const attachBtn = document.getElementById('attachBtn');
     if (attachBtn) {
         attachBtn.addEventListener('click', function() {
-            alert('File attachment feature coming soon!');
+            alert('File attachment feature not added yet!');
         });
         console.log('Attach button attached');
     }
