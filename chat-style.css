@@ -365,6 +365,12 @@ nav {
     margin-bottom: 2rem;
 }
 
+.welcome-screen h6{
+    color: #666;
+    position: relative;
+    bottom: 30px;
+}
+
 .suggestion-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -564,6 +570,7 @@ nav {
 
 .modal-overlay.active {
     display: flex;
+    
 }
 
 .modal-content {
