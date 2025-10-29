@@ -1,4 +1,3 @@
-const API_URL = 'http://localhost:3000';
 let sessionId = 'user_' + Date.now();
 let isTyping = false;
 let conversationHistory = [];
@@ -99,9 +98,9 @@ async function handleSendMessage() {
     if (statusText) statusText.textContent = 'Thinking...';
     
     try {
-        console.log('Sending message to:', `${API_URL}/api/chat`);
+        console.log('Sending message to:', `/api/chat`);
         
-        const response = await fetch(`${API_URL}/api/chat`, {
+        const response = await fetch(`/api/chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message, sessionId })
